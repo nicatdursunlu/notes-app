@@ -17,7 +17,7 @@ export const Header = () => {
             </Logo>
             <NavLinkContainer>
                 <StyledNavLink exact to="/notes-app">
-                    <FaStickyNote className="actual-logo" />Actual
+                    <FaStickyNote className="actual-logo"/>Actual
                 </StyledNavLink>
                 <StyledNavLink to="/archive">
                     <FiBox className="actual-logo"/>Archive

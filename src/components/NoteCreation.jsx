@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-export const NoteCreation = ({ initial = {} }) => {
+export const NoteCreation = ({ initial = {}, push }) => {
   const [notes, setNotes] = useState([]);
 
   const [fields, setFields] = useState({
@@ -10,22 +10,30 @@ export const NoteCreation = ({ initial = {} }) => {
     color: "#d32727",
     archiveStatus: false,
     date: Date.now(),
-    ...initial
+    ...initial,
   });
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setFields(field => ({
+    setFields((field) => ({
       ...field,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
-    createNote(fields);
-
-  }
+  const onSubmit = (e) => {
+    if (fields.title.trim() === "") {
+      alert("Title is necessary, please, fill the gap");
+      e.preventDefault();
+    } else if (fields.text.trim() === "") {
+      alert("Text is necessary, please, fill the gap");
+      e.preventDefault();
+    } else {
+      e.preventDefault();
+      createNote(fields);
+      push("/notes-app");
+    }
+  };
 
   const getNotes = async () => {
     try {
@@ -43,9 +51,9 @@ export const NoteCreation = ({ initial = {} }) => {
       const res = await fetch("http://localhost:3006/notes", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, text, color, archiveStatus, date })
+        body: JSON.stringify({ title, text, color, archiveStatus, date }),
       });
       const answer = await res.json();
       console.log(answer);
@@ -54,7 +62,9 @@ export const NoteCreation = ({ initial = {} }) => {
     }
   };
 
-  useEffect(() => { getNotes(); }, []);
+  useEffect(() => {
+    getNotes();
+  }, []);
 
   return (
     <div>
@@ -62,14 +72,14 @@ export const NoteCreation = ({ initial = {} }) => {
         <Input
           placeholder="note heading"
           type="text"
-          name='title'
+          name="title"
           value={fields.title}
           onChange={onChange}
         />
         <Textarea
           placeholder="note context"
           type="text"
-          name='text'
+          name="text"
           value={fields.text}
           onChange={onChange}
         />
@@ -121,7 +131,7 @@ export const NoteCreation = ({ initial = {} }) => {
       </Form>
     </div>
   );
-}
+};
 
 const Form = styled.form`
   border: 2px solid #494d9e;
@@ -133,7 +143,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  margin:0 auto;
+  margin: 0 auto;
   background-color: transparent;
   color: #494d9e;
   font-weight: bold;
@@ -203,7 +213,7 @@ const ColorOption = styled.label`
     height: 20px;
     border-radius: 20%;
     margin: 0 10px;
-    background-color: ${p => p.color};
+    background-color: ${(p) => p.color};
     border: 4px solid transparent;
     cursor: pointer;
   }
@@ -212,20 +222,3 @@ const ColorOption = styled.label`
     border-color: white;
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

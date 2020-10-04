@@ -77,7 +77,7 @@ export const SingleNote = ({ history: { push }, match: { params: { id } } }) => 
 
     const deleteHandler = () => {
         deleteNote(id);
-        push('/');
+        push('/notes-app');
     }
 
     return(
@@ -93,7 +93,7 @@ export const SingleNote = ({ history: { push }, match: { params: { id } } }) => 
                         {note.archiveStatus ?
                             <CloseButton onClick={() => push('/archive')}><MdClose/></CloseButton>
                             :
-                            <CloseButton onClick={() => push('/')}><MdClose/></CloseButton>
+                            <CloseButton onClick={() => push('/notes-app')}><MdClose/></CloseButton>
                         }
                     </Header>
                     <Text>{note.text}</Text>

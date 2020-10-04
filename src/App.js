@@ -12,7 +12,7 @@ function App() {
       <Header/>
       <NoteContextProvider>
         <Switch>
-          <Route exact path="/" component={Homepage} />  
+          <Route exact path="/notes-app" component={Homepage} />  
           <Route path="/single-note/:id" component={SingleNote} />
           <Route path="/create" component={Create} /> 
           <Route path="/archive" component={Archive} /> 

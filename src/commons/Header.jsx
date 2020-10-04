@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import images from '../styles/img';
 
 import { GoPlus } from "react-icons/go";
 import { FiBox } from "react-icons/fi";
 import { FaStickyNote } from "react-icons/fa";
+import images from '../styles/img';
 
 
 export const Header = () => {
@@ -13,9 +13,10 @@ export const Header = () => {
         <Container>
             <Logo>
                 <Image src={images.note} />
-                NotesApp</Logo>
+                NotesApp
+            </Logo>
             <NavLinkContainer>
-                <StyledNavLink exact to="/">
+                <StyledNavLink exact to="/notes-app">
                     <FaStickyNote className="actual-logo" />Actual
                 </StyledNavLink>
                 <StyledNavLink to="/archive">
